@@ -1,0 +1,152 @@
+/* ──────────────────────────────────────────────
+   Tailwind directives — these must come first
+   base: resets and sensible defaults
+   components: reusable component classes
+   utilities: all the utility classes like p-4, flex, etc.
+   ────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global reset ── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── App-wide body styles ── */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #F0FAF6;          /* soft mint green background */
+  color: #1a2e25;               /* dark green-ish text */
+  overflow-x: hidden;           /* prevent horizontal scroll from animations */
+}
+
+/* ── Slim custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5BBF9F;          /* brand green */
+  border-radius: 4px;
+}
+
+/* ── Circular progress ring animation ── */
+.ring-progress {
+  transition: stroke-dashoffset 1.2s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ── Card hover lift effect ── */
+.hover-lift {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(27, 94, 79, 0.13);
+}
+
+/* ── Pulsing notification dot ── */
+.pulse {
+  animation: pulse-anim 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-anim {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 143, 163, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(255, 143, 163, 0);
+  }
+}
+
+/* ── Falling emoji particles (mood check-in shower) ── */
+.emoji-particle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 28px;
+  animation: fall 2.2s ease-in forwards;
+  z-index: 9999;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(360deg) scale(0.5);
+  }
+}
+
+/* ── Modal backdrop (semi-transparent overlay) ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 40, 30, 0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* ── Fade-in animation for page transitions ── */
+.page-enter {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Form input defaults ── */
+input,
+select,
+textarea {
+  font-family: 'Nunito', sans-serif;
+  outline: none;
+}
+
+/* Green focus ring on all form fields */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #5BBF9F !important;
+  box-shadow: 0 0 0 3px rgba(91, 191, 159, 0.15);
+}
+
+/* ── Smooth bar chart height transitions ── */
+.bar-item {
+  transition: height 0.6s ease;
+}
+
+/* ── Sidebar navigation styles ── */
+.nav-active {
+  background: #E6F7F2;
+  color: #1B5E4F;
+  font-weight: 700;
+}
+
+.nav-inactive {
+  color: #6B8C83;
+}
+
+.nav-inactive:hover {
+  background: #F0FAF6;
+  color: #1B5E4F;
+}
