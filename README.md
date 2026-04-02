@@ -1,41 +1,47 @@
-# Fluid HR - Employee Dashboard
+# Fluid — Employee Dashboard
 
-This project is a high-fidelity frontend and lightweight backend implementation for the **Employee Persona** of the HRIS Dashboard (Problem 2). 
+This project is my implementation of the **Employee Persona** from the HRIS Dashboard.
 
-### Design Approach & Retrospective
-*The frontend was structured to directly reflect my UX decisions: prioritizing the immediate needs of an employee (Leave balances, Payslip access, Action shortcuts) without burying them in nested tables. The layout translates these into modular React components (like the `Ring.jsx` or `LeaveModal.jsx`) keeping the codebase predictable. "Apply Leave", being the most executed action, is a one-click CTA on the primary Hero banner.*
+## Design Approach & Retrospective
+My idea was simple — don’t overwhelm the user. When an employee logs in, they shouldn’t have to “figure things out.” So I focused on showing only what actually matters: leave balance, payslips, and quick actions.
 
-*If I had more time, I would swap out the file-based SQLite setup for a fully typed PostgreSQL database to scale to production standards. Cultivating a robust state manager to manage more complex employee application workflows, and building out End-to-End browser tests would be my next immediate iterations.*
+That thinking directly shaped how I built the frontend. Instead of one heavy layout, I broke things into small, predictable components like `Ring.jsx` and `LeaveModal.jsx` to keep everything clear and maintainable.
+
+“Apply Leave” is the most common action, so I made it a one-click CTA right in the hero section — no digging around.
+
+If I had more time, I’d move from SQLite to PostgreSQL, add stronger state management for complex flows, and include proper end-to-end testing.
 
 ## Overview
-The goal of this screen is to empower employees to manage their work profile effortlessly. As soon as an employee logs in, the dashboard acts as a guiding compass immediately displaying what matters most:
-- Remaining leave balances (prioritized front-and-center).
-- A one-click call-to-action to "Apply Leave".
-- Recent payslip figures and trend indicators.
-- Quick navigation shortcuts to core self-service features.
-- A quick emotional check-in (Mood Widget) to monitor team wellbeing.
+The dashboard is meant to feel like a starting point, not a control panel.
+
+As soon as the employee logs in, they can:
+- See their leave balance instantly
+- Apply for leave in one click
+- Check recent payslips and trends
+- Navigate quickly to key actions
+- Do a quick mood check-in (small fun element)
 
 ## Tech Stack & Why
-- **Frontend**: React + Vite
-  - *Why*: Allows for extremely fast, snappy rendering with component reusability. Vite drastically cuts down development server spin-up times.
-- **Styling**: TailwindCSS
-  - *Why*: Facilitates rapid, high-fidelity UI recreation from the Figma designs without the overhead of juggling separate CSS files.
-- **Backend API**: Node.js & Express
-  - *Why*: A minimal server to validate the architectural structure of an API separated from the client.
-- **Database**: SQLite (via `sql.js`)
-  - *Why*: A zero-dependency, highly portable database that can be initialized on-the-fly. Perfect for a reviewable assignment without requiring the reviewer to spin up a Docker container or configure PostgreSQL.
-- **Authentication**: JWT & `bcryptjs`
-  - *Why*: Implements real, secure stateless session creation rather than mocking auth purely on the frontend.
+- **React + Vite**  
+  Fast rendering and clean component structure. Vite keeps development quick.
+
+- **TailwindCSS**  
+  Helped me translate Figma designs into UI quickly without overcomplicating styling.
+
+- **Node.js & Express**  
+  Minimal backend to show proper API structure.
+
+- **SQLite**  
+  Simple and easy to run without setup overhead.
+
+- **JWT + bcryptjs**  
+  Real authentication instead of mocked flows.
 
 ## Features Implemented
-- **Full Authentication Flow**: Real account creation, password hashing, and user sessions.
-- **Dynamic Leave Management**: Leave balances are genuinely deducted and accurately calculated into frontend rings from the SQLite backend.
-- **Micro-Interactions**: Hover states, gradient overlays, and dynamic widget interactions (Mood Selector) mapped directly from the UX decisions.
+- Real authentication (signup, login, password hashing)
+- Dynamic leave balance updates from backend
+- Small UI interactions (hover states, mood widget, etc.)
 
 ## Assumptions Made
-- Data components relevant to other personas (like HR uploading performance reviews or payroll creating the payslip) are currently seeded or treated as read-only for this Employee persona view. 
-- Leave management approvals are assumed "Pending" upon creation, bypassing the Manager persona's approval screen in the interest of scope limit.
-
----
-
-
+- Payroll and performance data are treated as pre-filled/read-only
+- Leave requests go into "Pending" without manager approval flow (scope-focused)
